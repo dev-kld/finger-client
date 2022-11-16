@@ -1,0 +1,34 @@
+@import 'mixins.scss';
+
+$colors: (
+    background: #171930,
+    background-lighter: #1e203b,
+    background-darker: #0d0f22,
+    primary: #3e6fef,
+    primary-darker: darken(#3e6fef, 5%),
+    secondary: #8fc9ff,
+    secondary-darker: darken(#8fc9ff, 5%),
+    light: #ffffff
+);
+
+:root {
+    --color-background: #{map-get($colors, 'background')};
+    --color-background-lighter: #{map-get($colors, 'background-lighter')};
+    --color-background-darker: #{map-get($colors, 'background-darker')};
+
+    --color-primary: #{map-get($colors, 'primary')};
+    --color-primary-darker: #{map-get($colors, 'primary-darker')};
+
+    --color-secondary: #{map-get($colors, 'secondary')};
+
+    --color-white: #{map-get($colors, 'light')};
+}
+
+:root {
+    --color-background-rgb: #{HexToRGB(map-get($colors, 'background'))};
+    --color-background-lighter-rgb: #{HexToRGB(map-get($colors, 'background-lighter'))};
+    --color-background-darker-rgb: #{HexToRGB(map-get($colors, 'background-darker'))};
+    --color-primary-rgb: #{HexToRGB(map-get($colors, 'primary'))};
+    --color-secondary-rgb: #{HexToRGB(map-get($colors, 'secondary'))};
+    --color-white-rgb: #{HexToRGB(map-get($colors, 'light'))};
+}
