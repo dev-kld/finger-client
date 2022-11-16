@@ -5,9 +5,9 @@
 
             <form class="auth__form">
                 <div class="auth-fields">
-                    <BaseInput placeholder="Введите email" class="auth-fields__item" />
-                    <BaseInput placeholder="Введите пароль" class="auth-fields__item" />
-                    <BaseInput placeholder="Повторите пароль" class="auth-fields__item" />
+                    <BaseInput placeholder="Введите email" append-icon="user" class="auth-fields__item" />
+                    <BaseInput placeholder="Введите пароль" append-icon="lock" class="auth-fields__item" />
+                    <BaseInput placeholder="Повторите пароль" append-icon="lock" class="auth-fields__item" />
                 </div>
 
                 <div class="auth-actions">

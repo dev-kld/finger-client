@@ -5,9 +5,9 @@
 
             <form class="auth__form">
                 <div class="auth-fields">
-                    <BaseInput placeholder="Введите email" class="auth-fields__item" />
+                    <BaseInput placeholder="Введите email" append-icon="user" class="auth-fields__item" />
                     <div class="auth-fields__item">
-                        <BaseInput placeholder="Введите пароль" />
+                        <BaseInput placeholder="Введите пароль" append-icon="lock" />
                         <RouterLink to="/" class="auth-fields__reset-password">Забыли пароль?</RouterLink>
                     </div>
                 </div>
