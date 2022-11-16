@@ -1,6 +1,7 @@
 <template>
     <button
         class="button"
+        :type="props.nativeType"
         :class="[
             `button--${props.type}`,
             {
@@ -13,12 +14,17 @@
 </template>
 
 <script lang="ts" setup>
+import type { ButtonHTMLAttributes } from 'vue';
+
 interface Props {
     type: 'primary' | 'secondary';
     expanded?: boolean;
+    nativeType?: ButtonHTMLAttributes['type'];
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+    nativeType: 'button'
+});
 </script>
 
 <style lang="scss">

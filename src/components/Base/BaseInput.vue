@@ -10,21 +10,35 @@
         <div class="input__wrapper">
             <SvgIcon v-if="props.appendIcon" :name="props.appendIcon" class="input__icon" />
             <div class="input__append">
-                <input type="text" class="input__element" :placeholder="props.placeholder" />
+                <input
+                    :type="props.nativeType"
+                    class="input__element"
+                    :placeholder="props.placeholder"
+                    @input="updateValue(($event.target as HTMLInputElement).value)"
+                />
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
+import type { InputHTMLAttributes } from 'vue';
 import SvgIcon from '~/components/Common/SvgIcon.vue';
 
 interface Props {
     placeholder?: string;
     appendIcon?: string;
+    nativeType?: InputHTMLAttributes['type'];
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+    nativeType: 'text'
+});
+const emits = defineEmits<{ (e: 'update:modelValue', value: string): void }>();
+
+const updateValue = (value: string) => {
+    emits('update:modelValue', value);
+};
 </script>
 
 <style lang="scss">
