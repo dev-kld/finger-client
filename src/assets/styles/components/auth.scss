@@ -1,0 +1,55 @@
+.auth {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    &__logo {
+        text-align: center;
+    }
+
+    &__form {
+        margin-top: 32px;
+    }
+
+    &__privacy {
+        opacity: 0.5;
+        text-align: center;
+        font-size: 11px;
+        margin-top: 32px;
+
+        a {
+            color: var(--color-primary);
+        }
+    }
+}
+
+.auth-fields {
+    &__item {
+        &:not(:last-child) {
+            margin-bottom: 16px;
+        }
+    }
+
+    &__reset-password {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 13px;
+        opacity: 0.5;
+        margin-top: 8px;
+    }
+}
+
+.auth-actions {
+    margin-top: 24px;
+
+    &__button {
+        &:not(:last-child) {
+            margin-bottom: 8px;
+        }
+    }
+}
