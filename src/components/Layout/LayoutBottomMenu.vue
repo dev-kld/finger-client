@@ -9,10 +9,10 @@
 
                 <button class="bottom-menu__add">+</button>
 
-                <div v-for="(navItem, navIndex) in navigation.slice(2, navigation.length)" :key="navIndex" to="/" class="menu-item">
+                <RouterLink v-for="(navItem, navIndex) in navigation.slice(2, navigation.length)" :key="navIndex" to="/" class="menu-item">
                     <SvgIcon :name="navItem.icon" class="menu-item__icon" />
                     <div class="menu-item__name">{{ navItem.title }}</div>
-                </div>
+                </RouterLink>
             </div>
         </div>
     </nav>
@@ -37,7 +37,9 @@ const navigation = ref<NavigationItem[]>([
 
 <style lang="scss">
 .bottom-menu {
-    padding: 8px 0;
+    height: var(--app-bottom-menu-height);
+    display: flex;
+    align-items: center;
     background: var(--color-background-darker);
 
     &__wrapper {

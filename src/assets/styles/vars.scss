@@ -32,3 +32,7 @@ $colors: (
     --color-secondary-rgb: #{HexToRGB(map-get($colors, 'secondary'))};
     --color-white-rgb: #{HexToRGB(map-get($colors, 'light'))};
 }
+
+:root {
+    --app-bottom-menu-height: 60px;
+}

@@ -6,23 +6,23 @@
                 'input--has-append-icon': props.appendIcon
             }
         ]"
+        @click="() => inputElement?.focus()"
     >
-        <div class="input__wrapper">
+        <div class="input__append">
             <SvgIcon v-if="props.appendIcon" :name="props.appendIcon" class="input__icon" />
-            <div class="input__append">
-                <input
-                    :type="props.nativeType"
-                    class="input__element"
-                    :placeholder="props.placeholder"
-                    @input="updateValue(($event.target as HTMLInputElement).value)"
-                />
-            </div>
+            <input
+                ref="inputElement"
+                :type="props.nativeType"
+                class="input__element"
+                :placeholder="props.placeholder"
+                @input="updateValue(($event.target as HTMLInputElement).value)"
+            />
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import type { InputHTMLAttributes } from 'vue';
+import { ref, type InputHTMLAttributes } from 'vue';
 import SvgIcon from '~/components/Common/SvgIcon.vue';
 
 interface Props {
@@ -39,40 +39,42 @@ const emits = defineEmits<{ (e: 'update:modelValue', value: string): void }>();
 const updateValue = (value: string) => {
     emits('update:modelValue', value);
 };
+
+const inputElement = ref<null | HTMLInputElement>(null);
 </script>
 
 <style lang="scss">
 .input {
+    $self: &;
     $padding-x: 16px;
 
-    position: relative;
+    display: flex;
+    align-items: center;
     background: var(--color-background-lighter);
     font-size: 13px;
     border-radius: 16px;
+    height: 40px;
+    padding: 0 $padding-x;
 
     &__element {
-        height: 40px;
         width: 100%;
         color: var(--color-white);
-        background: none;
-        border: none;
-        outline: none;
-        padding: 0 $padding-x;
 
         &::placeholder {
             color: rgba(var(--color-white-rgb), 0.5);
         }
     }
 
-    &__icon {
-        position: absolute;
-        height: 100%;
-        left: calc($padding-x * 1.5);
-        transform: translateX(-50%);
+    &__append {
+        display: flex;
+        align-items: center;
+        width: 100%;
     }
 
     &--has-append-icon {
-        padding-left: calc($padding-x * 1.5);
+        #{$self}__icon {
+            margin-right: 8px;
+        }
     }
 }
 </style>
