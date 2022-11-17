@@ -32,8 +32,6 @@ const props = withDefaults(defineProps<Props>(), {
     padding: 8px 16px;
     border-radius: 8px;
     font-size: 13px;
-    border: none;
-    cursor: pointer;
     transition: background 0.2s ease-in-out;
 
     &--primary {

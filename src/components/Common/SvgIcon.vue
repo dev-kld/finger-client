@@ -18,5 +18,6 @@ const symbolId = `${pathToSprite}#${props.name}`;
 .svg-icon {
     width: 16px;
     height: 16px;
+    fill: var(--color-white);
 }
 </style>
