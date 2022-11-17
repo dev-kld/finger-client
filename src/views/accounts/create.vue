@@ -10,7 +10,7 @@
                 <BaseInput append-icon="money" placeholder="Начальный баланс" type="number" class="create-account__field" />
                 <BaseInput append-icon="globe" placeholder="Валюта счета" class="create-account__field" />
                 <BaseInput append-icon="wallet" placeholder="Тип счета" class="create-account__field" />
-                <BaseSelect append-icon="wallet" :items="selectItems" placeholder="Выберите что-нибудь" />
+                <BaseSelect append-icon="wallet" :items="selectItems" placeholder="Выберите что-нибудь" class="create-account__field" />
 
                 <BaseButton type="primary" class="create-account__button">Создать</BaseButton>
             </form>

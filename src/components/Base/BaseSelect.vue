@@ -1,5 +1,9 @@
 <template>
-    <div class="select" :class="[{ 'select--opened': isDropdownShown, 'select--no-selected': !selectedItem }]">
+    <div
+        v-on-click-outside="() => (isDropdownShown = false)"
+        class="select"
+        :class="[{ 'select--opened': isDropdownShown, 'select--no-selected': !selectedItem }]"
+    >
         <div
             class="select-block"
             :class="[{ 'select-block--has-append-icon': props.appendIcon }]"
@@ -34,6 +38,7 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
+import { vOnClickOutside } from '@vueuse/components';
 import SvgIcon from '~/components/Common/SvgIcon.vue';
 
 export interface SelectItem {
