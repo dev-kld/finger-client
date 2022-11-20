@@ -20,26 +20,30 @@ app.use(store);
 const cookies = useCookies();
 const userStore = useStoreUser();
 
-const onAppInit = async () => {
-    const accessToken = cookies.get(COOKIE_ACCESS_TOKEN_KEY);
-    const accessTokenExpiredAt = cookies.get(COOKIE_ACCESS_TOKEN_EXPIRING_KEY);
+const startServer = async () => {
+    const onAppInit = async () => {
+        const accessToken = cookies.get(COOKIE_ACCESS_TOKEN_KEY);
+        const accessTokenExpiredAt = cookies.get(COOKIE_ACCESS_TOKEN_EXPIRING_KEY);
 
-    if (accessToken && accessTokenExpiredAt) {
-        const isTokenAlive = dayjs(accessTokenExpiredAt).isAfter(Date.now());
+        if (accessToken && accessTokenExpiredAt) {
+            const isTokenAlive = dayjs(accessTokenExpiredAt).isAfter(Date.now());
 
-        if (!isTokenAlive) {
-            cookies.remove(COOKIE_ACCESS_TOKEN_KEY);
-            cookies.remove(COOKIE_ACCESS_TOKEN_EXPIRING_KEY);
-        } else {
-            axiosInstance.defaults.headers.common['Authorization'] = accessToken;
+            if (!isTokenAlive) {
+                cookies.remove(COOKIE_ACCESS_TOKEN_KEY);
+                cookies.remove(COOKIE_ACCESS_TOKEN_EXPIRING_KEY);
+            } else {
+                axiosInstance.defaults.headers.common['Authorization'] = accessToken;
 
-            const userData = await axiosInstance.get<UserData>('/auth/check-token');
-            userStore.$patch({ user: userData.data });
+                const userData = await axiosInstance.get<UserData>('/auth/check-token');
+                userStore.$patch({ user: userData.data });
+            }
         }
-    }
+    };
+
+    await onAppInit();
+
+    app.use(router);
+    app.mount('#app');
 };
 
-await onAppInit();
-
-app.use(router);
-app.mount('#app');
+startServer();
