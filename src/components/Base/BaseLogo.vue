@@ -22,5 +22,9 @@ const props = withDefaults(defineProps<Props>(), {
     &--small {
         font-size: 14px;
     }
+
+    &--medium {
+        font-size: 24px;
+    }
 }
 </style>

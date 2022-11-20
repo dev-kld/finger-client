@@ -1,7 +1,7 @@
 <template>
     <div class="auth">
         <div class="container">
-            <BaseLogo class="auth__logo" />
+            <BaseLogo size="medium" class="auth__logo" />
 
             <form class="auth__form" @submit.prevent="">
                 <div class="auth-fields">

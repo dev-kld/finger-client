@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useStoreUser } from '~/stores/user';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     linkActiveClass: 'active-link',
+    linkExactActiveClass: '',
     routes: [
         {
             path: '/',
@@ -15,11 +17,17 @@ const router = createRouter({
         {
             path: '/sign-in',
             name: 'SignIn',
+            meta: {
+                authRoute: true
+            },
             component: () => import('~/views/sign-in.vue')
         },
         {
             path: '/sign-up',
             name: 'SignUp',
+            meta: {
+                authRoute: true
+            },
             component: () => import('~/views/sign-up.vue')
         },
         {
@@ -28,6 +36,17 @@ const router = createRouter({
             component: () => import('~/views/accounts/create.vue')
         }
     ]
+});
+
+router.beforeEach((to, from, next) => {
+    const userStore = useStoreUser();
+    const { user } = userStore;
+
+    if (to.matched.some((r) => r.meta.authRoute)) {
+        user ? next({ name: 'Home' }) : next();
+    } else {
+        user ? next() : next({ name: 'SignIn' });
+    }
 });
 
 export default router;

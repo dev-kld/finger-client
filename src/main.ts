@@ -9,32 +9,37 @@ import '~/assets/styles/main.scss';
 import { useCookies } from '@vueuse/integrations/useCookies';
 import { COOKIE_ACCESS_TOKEN_EXPIRING_KEY, COOKIE_ACCESS_TOKEN_KEY } from './helpers/constants';
 import { axiosInstance } from './services/http';
+import type { UserData } from '~/types/user';
+import { useStoreUser } from '~/stores/user';
 
 const app = createApp(App);
 const store = createPinia();
 
 app.use(store);
-app.use(router);
 
 const cookies = useCookies();
+const userStore = useStoreUser();
 
-const onAppInit = () => {
+const onAppInit = async () => {
     const accessToken = cookies.get(COOKIE_ACCESS_TOKEN_KEY);
     const accessTokenExpiredAt = cookies.get(COOKIE_ACCESS_TOKEN_EXPIRING_KEY);
 
     if (accessToken && accessTokenExpiredAt) {
-        const expiringDate = dayjs(accessTokenExpiredAt);
-        const isAlive = expiringDate.isAfter(Date.now());
+        const isTokenAlive = dayjs(accessTokenExpiredAt).isAfter(Date.now());
 
-        if (!isAlive) {
+        if (!isTokenAlive) {
             cookies.remove(COOKIE_ACCESS_TOKEN_KEY);
             cookies.remove(COOKIE_ACCESS_TOKEN_EXPIRING_KEY);
         } else {
             axiosInstance.defaults.headers.common['Authorization'] = accessToken;
+
+            const userData = await axiosInstance.get<UserData>('/auth/check-token');
+            userStore.$patch({ user: userData.data });
         }
     }
 };
 
-onAppInit();
+await onAppInit();
 
+app.use(router);
 app.mount('#app');
