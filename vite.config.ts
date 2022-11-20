@@ -26,11 +26,11 @@ export default defineConfig({
             '~': fileURLToPath(new URL('./src', import.meta.url))
         }
     },
-    publicDir: 'static',
+    publicDir: './src/static',
     css: {
         preprocessorOptions: {
             scss: {
-                additionalData: '@import "~/assets/styles/vars.scss";'
+                additionalData: '@import "~/assets/styles/breakpoints.scss";'
             }
         }
     }

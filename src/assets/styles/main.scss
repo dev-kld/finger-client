@@ -44,4 +44,13 @@ h6 {
 .container {
     padding: 0 16px;
     width: 100%;
+
+    @media (min-width: #{map-get($breakpoints, 'tablet')}) {
+        max-width: 1152px;
+        margin: 0 auto;
+    }
+}
+
+.header {
+    margin-bottom: 32px;
 }

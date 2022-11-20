@@ -12,9 +12,10 @@
             <SvgIcon v-if="props.appendIcon" :name="props.appendIcon" class="input__icon" />
             <input
                 ref="inputElement"
-                :type="props.nativeType"
                 class="input__element"
+                :type="props.nativeType"
                 :placeholder="props.placeholder"
+                :value="props.modelValue"
                 @input="updateValue(($event.target as HTMLInputElement).value)"
             />
         </div>
@@ -29,11 +30,13 @@ interface Props {
     placeholder?: string;
     appendIcon?: string;
     nativeType?: InputHTMLAttributes['type'];
+    modelValue?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
     nativeType: 'text'
 });
+
 const emits = defineEmits<{ (e: 'update:modelValue', value: string): void }>();
 
 const updateValue = (value: string) => {

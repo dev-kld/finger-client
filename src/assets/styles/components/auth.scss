@@ -27,7 +27,7 @@
 .auth-fields {
     &__item {
         &:not(:last-child) {
-            margin-bottom: 16px;
+            margin-bottom: 8px;
         }
     }
 
@@ -41,7 +41,7 @@
 }
 
 .auth-actions {
-    margin-top: 24px;
+    margin-top: 16px;
 
     &__button {
         &:not(:last-child) {

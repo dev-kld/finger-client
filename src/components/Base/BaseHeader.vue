@@ -1,18 +1,14 @@
 <template>
-    <header class="header">
-        <template v-if="props.type === 'user'">
-            <div class="header-user">
-                <div class="header-user__avatar">К</div>
-                <span class="header-user__name">Кирилл</span>
-            </div>
-        </template>
+    <header v-if="!breakpoints.tablet.value" class="header">
+        <div v-if="props.type === 'user'" class="header-user">
+            <div class="header-user__avatar">К</div>
+            <span class="header-user__name">Кирилл</span>
+        </div>
 
-        <template v-if="props.type === 'history'">
-            <div class="header-back" @click="() => router.go(-1)">
-                <SvgIcon name="arrow-left" class="header-back__icon" />
-                <span class="header-back__title">Назад</span>
-            </div>
-        </template>
+        <div v-if="props.type === 'history'" class="header-back" @click="() => router.go(-1)">
+            <SvgIcon name="arrow-left" class="header-back__icon" />
+            <span class="header-back__title">Назад</span>
+        </div>
 
         <div v-if="$slots.title" class="header__title">
             <slot name="title"></slot>
@@ -21,22 +17,23 @@
 </template>
 
 <script lang="ts" setup>
+import { useBreakpoints } from '@vueuse/core';
 import { useRouter } from 'vue-router';
 import SvgIcon from '~/components/Common/SvgIcon.vue';
+import { BREAKPOINTS } from '~/helpers/constants';
 
 interface Props {
-    type: 'user' | 'history';
+    type?: 'user' | 'history';
 }
 
 const props = defineProps<Props>();
-
 const router = useRouter();
+
+const breakpoints = useBreakpoints(BREAKPOINTS);
 </script>
 
 <style lang="scss">
 .header {
-    margin-bottom: 32px;
-
     &__title {
         font-size: 20px;
         font-weight: 700;

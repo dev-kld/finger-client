@@ -20,10 +20,10 @@
 
 <script lang="ts" setup>
 import type { SelectItem } from '~/components/Base/BaseSelect.vue';
-import BaseHeader from '~/components/Base/BaseHeader.vue';
 import BaseInput from '~/components/Base/BaseInput.vue';
 import BaseButton from '~/components/Base/BaseButton.vue';
 import BaseSelect from '~/components/Base/BaseSelect.vue';
+import BaseHeader from '~/components/Base/BaseHeader.vue';
 
 const selectItems: SelectItem[] = [
     { title: 'Книги', value: 'books', icon: 'book' },

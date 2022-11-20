@@ -2,14 +2,19 @@
     <nav class="bottom-menu">
         <div class="container">
             <div class="bottom-menu__wrapper">
-                <RouterLink v-for="(navItem, navIndex) in navigation.slice(0, 2)" :key="navIndex" to="/" class="menu-item">
+                <RouterLink v-for="(navItem, navIndex) in navigationList.slice(0, 2)" :key="navIndex" to="/" class="menu-item">
                     <SvgIcon :name="navItem.icon" class="menu-item__icon" />
                     <div class="menu-item__name">{{ navItem.title }}</div>
                 </RouterLink>
 
                 <button class="bottom-menu__add">+</button>
 
-                <RouterLink v-for="(navItem, navIndex) in navigation.slice(2, navigation.length)" :key="navIndex" to="/" class="menu-item">
+                <RouterLink
+                    v-for="(navItem, navIndex) in navigationList.slice(2, navigationList.length)"
+                    :key="navIndex"
+                    to="/"
+                    class="menu-item"
+                >
                     <SvgIcon :name="navItem.icon" class="menu-item__icon" />
                     <div class="menu-item__name">{{ navItem.title }}</div>
                 </RouterLink>
@@ -19,20 +24,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
 import SvgIcon from '~/components/Common/SvgIcon.vue';
+import { useNavigation } from '~/composables/navigation';
 
-interface NavigationItem {
-    icon: string;
-    title: string;
-}
-
-const navigation = ref<NavigationItem[]>([
-    { icon: 'home', title: 'Главная' },
-    { icon: 'activity', title: 'Аналитика' },
-    { icon: 'book', title: 'История' },
-    { icon: 'user', title: 'Профиль' }
-]);
+const navigation = useNavigation();
+const navigationList = [navigation.home, navigation.analytics, navigation.history, navigation.profile];
 </script>
 
 <style lang="scss">

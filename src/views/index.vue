@@ -1,9 +1,9 @@
 <template>
     <div class="home" :class="[{ 'home--empty': !hasAccounts }]">
         <div class="container">
-            <BaseHeader type="user" />
-
             <template v-if="hasAccounts">
+                <BaseHeader type="user" />
+
                 <div class="accounts-list">
                     <div class="accounts-list__header">
                         <BaseButton type="secondary" class="accounts-list__button" @click="() => router.push({ name: 'CreateAccount' })">
@@ -28,8 +28,8 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
 import BaseButton from '~/components/Base/BaseButton.vue';
-import BaseHeader from '~/components/Base/BaseHeader.vue';
 import AccountsGrid from '~/components/Accounts/AccountsGrid.vue';
+import BaseHeader from '~/components/Base/BaseHeader.vue';
 
 const router = useRouter();
 
