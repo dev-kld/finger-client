@@ -19,7 +19,7 @@ import LayoutHeader from '~/components/Layout/LayoutHeader.vue';
 const route = useRoute();
 
 const breakpoints = useBreakpoints(BREAKPOINTS);
-const isBottomMenuShown = computed(() => route.meta.bottomMenu && !breakpoints.tablet.value);
+const isBottomMenuShown = computed(() => !route.meta.bottomMenuHidden && !breakpoints.tablet.value);
 </script>
 
 <style lang="scss">

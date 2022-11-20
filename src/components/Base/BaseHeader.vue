@@ -1,13 +1,19 @@
 <template>
     <header v-if="!breakpoints.tablet.value" class="header">
-        <div v-if="props.type === 'user'" class="header-user">
-            <div class="header-user__avatar">К</div>
-            <span class="header-user__name">Кирилл</span>
-        </div>
+        <div class="header__wrapper">
+            <div v-if="props.type === 'user'" class="header-user">
+                <div class="header-user__avatar">К</div>
+                <span class="header-user__name">Кирилл</span>
+            </div>
 
-        <div v-if="props.type === 'history'" class="header-back" @click="() => router.go(-1)">
-            <SvgIcon name="arrow-left" class="header-back__icon" />
-            <span class="header-back__title">Назад</span>
+            <div v-if="props.type === 'history'" class="header-back" @click="() => router.go(-1)">
+                <SvgIcon name="arrow-left" class="header-back__icon" />
+                <span class="header-back__title">Назад</span>
+            </div>
+
+            <div v-if="$slots.prepend" class="header__prepend">
+                <slot name="prepend" />
+            </div>
         </div>
 
         <div v-if="$slots.title" class="header__title">

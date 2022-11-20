@@ -9,6 +9,7 @@
                 'button--expanded': props.expanded
             }
         ]"
+        :disabled="props.loading"
     >
         <img v-if="props.loading" src="/spinner.svg" class="button__spinner" />
         <slot v-else />

@@ -2,7 +2,11 @@
     <div class="home" :class="[{ 'home--empty': !hasAccounts }]">
         <div class="container">
             <template v-if="hasAccounts">
-                <BaseHeader type="user" />
+                <BaseHeader type="user">
+                    <template #prepend>
+                        <BaseButton type="secondary" size="small" @click="() => user.logout()">Выйти из аккаунта</BaseButton>
+                    </template>
+                </BaseHeader>
 
                 <div class="accounts-list">
                     <div class="accounts-list__header">
@@ -30,8 +34,10 @@ import { useRouter } from 'vue-router';
 import BaseButton from '~/components/Base/BaseButton.vue';
 import AccountsGrid from '~/components/Accounts/AccountsGrid.vue';
 import BaseHeader from '~/components/Base/BaseHeader.vue';
+import { useUser } from '~/composables/user';
 
 const router = useRouter();
+const user = useUser();
 
 const hasAccounts = true;
 </script>

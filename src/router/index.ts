@@ -9,16 +9,14 @@ const router = createRouter({
         {
             path: '/',
             name: 'Home',
-            meta: {
-                bottomMenu: true
-            },
             component: () => import('~/views/index.vue')
         },
         {
             path: '/sign-in',
             name: 'SignIn',
             meta: {
-                authRoute: true
+                authRoute: true,
+                bottomMenuHidden: true
             },
             component: () => import('~/views/sign-in.vue')
         },
@@ -26,7 +24,8 @@ const router = createRouter({
             path: '/sign-up',
             name: 'SignUp',
             meta: {
-                authRoute: true
+                authRoute: true,
+                bottomMenuHidden: true
             },
             component: () => import('~/views/sign-up.vue')
         },

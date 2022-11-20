@@ -46,8 +46,8 @@ import { reactive, ref } from 'vue';
 import BaseLogo from '~/components/Base/BaseLogo.vue';
 import BaseButton from '~/components/Base/BaseButton.vue';
 import BaseInput from '~/components/Base/BaseInput.vue';
-import type { UserSignInData } from '~/types/user';
-import type { ApiResponseSignUp } from '~/types/api';
+import type { UserSignUpData } from '~/types/user';
+import type { ApiResponseAuthorization } from '~/types/api';
 import { useStoreUser } from '~/stores/user';
 import { useRouter } from 'vue-router';
 import { useCookies } from '@vueuse/integrations/useCookies';
@@ -59,12 +59,11 @@ const userStore = useStoreUser();
 
 const router = useRouter();
 
-const account = 'test11';
-const form = reactive<UserSignInData & { passwordRepeat: string }>({
-    login: account,
-    name: account,
-    password: account,
-    passwordRepeat: account
+const form = reactive<UserSignUpData & { passwordRepeat: string }>({
+    login: '',
+    name: '',
+    password: '',
+    passwordRepeat: ''
 });
 
 const isSubmitting = ref(false);
@@ -72,7 +71,7 @@ const isSubmitting = ref(false);
 const handleFormSubmit = async () => {
     isSubmitting.value = true;
 
-    const formData: UserSignInData = {
+    const formData: UserSignUpData = {
         login: form.login,
         name: form.name,
         password: form.password
@@ -85,11 +84,12 @@ const handleFormSubmit = async () => {
         cookies.set(COOKIE_ACCESS_TOKEN_KEY, responseData.accessToken);
         cookies.set(COOKIE_ACCESS_TOKEN_EXPIRING_KEY, responseData.accessTokenExpiredAt);
 
-        const user: Partial<ApiResponseSignUp> = Object.assign({}, responseData);
+        const user: Partial<ApiResponseAuthorization> = Object.assign({}, responseData);
         delete user.accessToken;
         delete user.accessTokenExpiredAt;
 
         userStore.$patch({ user });
+        router.push({ name: 'Home' });
     } catch (e) {
         console.log(e);
     }

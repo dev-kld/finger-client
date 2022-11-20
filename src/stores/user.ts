@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { axiosInstance } from '~/services/http';
-import type { UserData, UserSignInData } from '~/types/user';
-import type { ApiResponseSignUp } from '~/types/api';
+import type { UserData, UserSignInData, UserSignUpData } from '~/types/user';
+import type { ApiResponseAuthorization } from '~/types/api';
 
 interface State {
     user: UserData | null;
@@ -13,8 +13,12 @@ export const useStoreUser = defineStore('user', {
     }),
 
     actions: {
-        signUp(data: UserSignInData) {
-            return axiosInstance.post<ApiResponseSignUp>('/auth/register', data);
+        signUp(data: UserSignUpData) {
+            return axiosInstance.post<ApiResponseAuthorization>('/auth/register', data);
+        },
+
+        signIn(data: UserSignInData) {
+            return axiosInstance.post<ApiResponseAuthorization>('/auth/login', data);
         }
     }
 });
