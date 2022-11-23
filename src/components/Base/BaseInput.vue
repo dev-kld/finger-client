@@ -26,7 +26,7 @@
 import { ref, type InputHTMLAttributes } from 'vue';
 import SvgIcon from '~/components/Common/SvgIcon.vue';
 
-type ModelValue = string | number;
+type ModelValue = string | number | null;
 
 interface Props {
     placeholder?: string;

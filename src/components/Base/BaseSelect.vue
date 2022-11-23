@@ -22,14 +22,14 @@
         <div v-if="isDropdownShown" class="select-dropdown">
             <div class="select-dropdown__wrapper">
                 <div
-                    v-for="(item, itemIndex) in props.items"
-                    :key="itemIndex"
+                    v-for="item in props.items"
+                    :key="item[idKey]"
                     class="select-item select-dropdown__item"
-                    :class="[{ 'select-item--active': selectedItem?.value === item.value }]"
+                    :class="[{ 'select-item--active': selectedItem?.[props.idKey] === item[idKey] }]"
                     @click="handleSelectItem(item)"
                 >
-                    <SvgIcon v-if="item.icon" :name="item.icon" class="select-item__icon" />
-                    <div class="select-item__title">{{ item.title }}</div>
+                    <!-- <SvgIcon v-if="item.icon" :name="item.icon" class="select-item__icon" /> -->
+                    <div class="select-item__title">{{ item[props.titleKey] }}</div>
                 </div>
             </div>
         </div>
@@ -42,16 +42,18 @@ import { vOnClickOutside } from '@vueuse/components';
 import SvgIcon from '~/components/Common/SvgIcon.vue';
 
 export interface SelectItem {
-    icon?: string;
-    title: string;
     [key: string]: any;
 }
 
 interface Props {
     placeholder?: string;
     appendIcon?: string;
-    items: SelectItem[];
     autoSelect?: boolean; // автоматически делает выбранным первое значение из `items`
+
+    items: { [key: string]: any }[];
+    titleKey: string;
+    idKey: string;
+    modelKey?: string; // ключ по которому происходит привязка
 }
 
 const props = defineProps<Props>();
@@ -61,7 +63,7 @@ const selectedItem = ref<null | SelectItem>(props.autoSelect ? props.items[0] : 
 
 const currentPlaceholder = computed(() => {
     if (selectedItem.value) {
-        return selectedItem.value.title;
+        return selectedItem.value[props.titleKey];
     }
 
     return props.placeholder;
@@ -69,11 +71,11 @@ const currentPlaceholder = computed(() => {
 
 const emits = defineEmits<{ (e: 'update:modelValue', value: SelectItem | null): void }>();
 const updateValue = (value: SelectItem | null) => {
-    emits('update:modelValue', value);
+    emits('update:modelValue', props.modelKey ? value?.[props.modelKey] : value);
 };
 
 const handleSelectItem = (item: SelectItem) => {
-    if (item.value !== selectedItem.value?.value) {
+    if (item[props.idKey] !== selectedItem.value?.[props.idKey]) {
         selectedItem.value = item;
     }
 

@@ -24,7 +24,7 @@ const isBottomMenuShown = computed(() => !route.meta.bottomMenuHidden && !breakp
 
 <style lang="scss">
 .layout {
-    padding: 56px 0 var(--app-bottom-menu-height);
+    padding: 56px 0 calc(16px + var(--app-bottom-menu-height));
 
     &__bottom-menu {
         position: fixed;

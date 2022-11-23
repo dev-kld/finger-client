@@ -1,3 +1,4 @@
+import type { Account } from './account';
 import type { AccountType, Currency } from './global';
 import type { UserData } from './user';
 
@@ -10,4 +11,8 @@ export interface ApiResponseAuthorization {
 export interface ApiResponseSettings {
     currency: Currency[];
     accountTypes: AccountType[];
+}
+
+export interface ApiResponseAccounts {
+    accounts: Account[];
 }

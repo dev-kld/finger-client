@@ -1,14 +1,16 @@
 <template>
     <div class="accounts-grid" :style="{ '--accounts-grid-columns': props.columns }">
-        <AccountItem v-for="account in 4" :key="account" class="accounts-grid__item" />
+        <AccountItem v-for="account in accounts" :key="account.id" :account="account" class="accounts-grid__item" />
     </div>
 </template>
 
 <script lang="ts" setup>
 import AccountItem from '~/components/Accounts/AccountItem.vue';
+import type { Account } from '~/types/account';
 
 interface Props {
     columns?: number;
+    accounts: Account[] | null;
 }
 
 const props = withDefaults(defineProps<Props>(), {

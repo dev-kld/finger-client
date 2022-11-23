@@ -10,20 +10,31 @@
         <SvgIcon name="book" class="account-item__icon" />
 
         <div class="account-item__footer">
-            <div class="account-item__name">Наличные средства</div>
-            <div class="account-item__balance">15,200 <span class="account-item__currency">RUB</span></div>
+            <div class="account-item__name">{{ account.name }}</div>
+            <div class="account-item__balance">
+                {{ account.balance }}
+                <span class="account-item__currency">{{ currency?.name }}</span>
+            </div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue';
 import SvgIcon from '~/components/Common/SvgIcon.vue';
+import { useStoreApp } from '~/stores/app';
+import type { Account } from '~/types/account';
 
 interface Props {
     active?: boolean;
+    account: Account;
 }
 
 const props = defineProps<Props>();
+
+const app = useStoreApp();
+
+const currency = computed(() => app.settings.currency.find((c) => c.code === props.account.currency));
 </script>
 
 <style lang="scss">

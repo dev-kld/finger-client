@@ -5,9 +5,7 @@
                 <template #title>Создать счет</template>
             </BaseHeader>
 
-            <pre>{{ form }}</pre>
-
-            <form class="create-account__form">
+            <form class="create-account__form" @submit.prevent="handleSubmitForm">
                 <BaseInput v-model="form.name" append-icon="book" placeholder="Название счета" class="create-account__field" />
                 <BaseInput
                     v-model="form.balance"
@@ -19,19 +17,23 @@
                 <BaseSelect
                     v-model="form.currency"
                     append-icon="wallet"
-                    :items="currencies"
+                    :items="appStore.settings.currency"
+                    title-key="name"
+                    id-key="code"
                     placeholder="Валюта счета"
                     class="create-account__field"
                 />
                 <BaseSelect
                     v-model="form.accountType"
                     append-icon="wallet"
-                    :items="accountTypes"
+                    :items="appStore.settings.accountTypes"
+                    title-key="name"
+                    id-key="code"
                     placeholder="Тип счета"
                     class="create-account__field"
                 />
 
-                <BaseButton type="primary" class="create-account__button">Создать</BaseButton>
+                <BaseButton type="primary" native-type="submit" class="create-account__button">Создать</BaseButton>
             </form>
         </div>
     </div>
@@ -42,33 +44,30 @@ import BaseInput from '~/components/Base/BaseInput.vue';
 import BaseButton from '~/components/Base/BaseButton.vue';
 import BaseHeader from '~/components/Base/BaseHeader.vue';
 import BaseSelect from '~/components/Base/BaseSelect.vue';
-import { computed, reactive } from 'vue';
 import { useStoreApp } from '~/stores/app';
+import { useStoreAccount } from '~/stores/account';
+import { reactive } from 'vue';
+import type { Nullable } from '~/types/global';
+import type { AccountCandidate } from '~/types/account';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const appStore = useStoreApp();
+const accountStore = useStoreAccount();
 
-const form = reactive({
-    name: '',
+const form = reactive<Nullable<AccountCandidate>>({
+    name: null,
     balance: 0,
-    accountType: 0,
-    currency: 0
+    accountType: null,
+    currency: null
 });
 
-const accountTypes = computed(() =>
-    appStore.settings.accountTypes.map((item) => ({
-        ...item,
-        title: item.name,
-        value: item.code
-    }))
-);
-
-const currencies = computed(() => {
-    return appStore.settings.currency.map((item) => ({
-        ...item,
-        title: item.name,
-        value: item.code
-    }));
-});
+const handleSubmitForm = async () => {
+    if (Object.values(form).every((v) => v !== null)) {
+        await accountStore.createAccount(form as NonNullable<AccountCandidate>);
+        router.push({ name: 'Home' });
+    }
+};
 </script>
 
 <style lang="scss">

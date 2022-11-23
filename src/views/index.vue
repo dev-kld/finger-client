@@ -1,7 +1,7 @@
 <template>
-    <div class="home" :class="[{ 'home--empty': !hasAccounts }]">
+    <div class="home" :class="[{ 'home--empty': !appStore.accounts }]">
         <div class="container">
-            <template v-if="hasAccounts">
+            <template v-if="appStore.accounts">
                 <BaseHeader type="user">
                     <template #prepend>
                         <BaseButton type="secondary" size="small" @click="() => user.logout()">Выйти из аккаунта</BaseButton>
@@ -13,7 +13,7 @@
                         <BaseButton type="secondary" class="accounts-list__button" @click="handleAddAccount"> Добавить счет </BaseButton>
                     </div>
 
-                    <AccountsGrid :columns="accountsGridColumns" />
+                    <AccountsGrid :accounts="appStore.accounts" :columns="accountsGridColumns" />
                 </div>
             </template>
 
@@ -36,9 +36,13 @@ import { useUser } from '~/composables/user';
 import { useBreakpoints } from '@vueuse/core';
 import { BREAKPOINTS } from '~/helpers/constants';
 import { computed } from 'vue';
+import { useStoreAccount } from '~/stores/account';
 
+const appStore = useStoreAccount();
 const router = useRouter();
 const user = useUser();
+
+appStore.fetchAccounts();
 
 const breakpoints = useBreakpoints(BREAKPOINTS);
 const accountsGridColumns = computed(() => {
@@ -57,8 +61,6 @@ const handleAddAccount = () => {
 
     router.push({ name: 'CreateAccount' });
 };
-
-const hasAccounts = true;
 </script>
 
 <style lang="scss">
