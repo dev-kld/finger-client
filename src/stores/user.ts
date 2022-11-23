@@ -19,6 +19,15 @@ export const useStoreUser = defineStore('user', {
 
         signIn(data: UserSignInData) {
             return axiosInstance.post<ApiResponseAuthorization>('/auth/login', data);
+        },
+
+        async fetchUserData() {
+            try {
+                const response = await axiosInstance.get<{ user: UserData }>('/auth/check-token');
+                this.user = response.data.user;
+            } catch (e) {
+                console.log(e);
+            }
         }
     }
 });

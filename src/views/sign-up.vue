@@ -47,15 +47,12 @@ import BaseLogo from '~/components/Base/BaseLogo.vue';
 import BaseButton from '~/components/Base/BaseButton.vue';
 import BaseInput from '~/components/Base/BaseInput.vue';
 import type { UserSignUpData } from '~/types/user';
-import type { ApiResponseAuthorization } from '~/types/api';
 import { useStoreUser } from '~/stores/user';
 import { useRouter } from 'vue-router';
-import { useCookies } from '@vueuse/integrations/useCookies';
-import { COOKIE_ACCESS_TOKEN_EXPIRING_KEY, COOKIE_ACCESS_TOKEN_KEY } from '~/helpers/constants';
-
-const cookies = useCookies();
+import { useUser } from '~/composables/user';
 
 const userStore = useStoreUser();
+const user = useUser();
 
 const router = useRouter();
 
@@ -81,15 +78,7 @@ const handleFormSubmit = async () => {
         const response = await userStore.signUp(formData);
         const { data: responseData } = response;
 
-        cookies.set(COOKIE_ACCESS_TOKEN_KEY, responseData.accessToken);
-        cookies.set(COOKIE_ACCESS_TOKEN_EXPIRING_KEY, responseData.accessTokenExpiredAt);
-
-        const user: Partial<ApiResponseAuthorization> = Object.assign({}, responseData);
-        delete user.accessToken;
-        delete user.accessTokenExpiredAt;
-
-        userStore.$patch({ user });
-        router.push({ name: 'Home' });
+        user.signIn(responseData);
     } catch (e) {
         console.log(e);
     }

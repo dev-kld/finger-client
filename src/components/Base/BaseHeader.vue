@@ -2,8 +2,8 @@
     <header v-if="!breakpoints.tablet.value" class="header">
         <div class="header__wrapper">
             <div v-if="props.type === 'user'" class="header-user">
-                <div class="header-user__avatar">К</div>
-                <span class="header-user__name">Кирилл</span>
+                <div class="header-user__avatar">{{ userStore.user?.name[0].toUpperCase() }}</div>
+                <span class="header-user__name">{{ userStore.user?.name }}</span>
             </div>
 
             <div v-if="props.type === 'history'" class="header-back" @click="() => router.go(-1)">
@@ -27,11 +27,13 @@ import { useBreakpoints } from '@vueuse/core';
 import { useRouter } from 'vue-router';
 import SvgIcon from '~/components/Common/SvgIcon.vue';
 import { BREAKPOINTS } from '~/helpers/constants';
+import { useStoreUser } from '~/stores/user';
 
 interface Props {
     type?: 'user' | 'history';
 }
 
+const userStore = useStoreUser();
 const props = defineProps<Props>();
 const router = useRouter();
 

@@ -14,11 +14,7 @@ export const useUser = () => {
         cookies.set(COOKIE_ACCESS_TOKEN_KEY, data.accessToken);
         cookies.set(COOKIE_ACCESS_TOKEN_EXPIRING_KEY, data.accessTokenExpiredAt);
 
-        const user: Partial<ApiResponseAuthorization> = Object.assign({}, data);
-        delete user.accessToken;
-        delete user.accessTokenExpiredAt;
-
-        await userStore.$patch({ user });
+        await userStore.$patch({ user: data.user });
         router.push({ name: 'Home' });
     };
 

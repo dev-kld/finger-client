@@ -26,21 +26,24 @@
 import { ref, type InputHTMLAttributes } from 'vue';
 import SvgIcon from '~/components/Common/SvgIcon.vue';
 
+type ModelValue = string | number;
+
 interface Props {
     placeholder?: string;
     appendIcon?: string;
     nativeType?: InputHTMLAttributes['type'];
-    modelValue?: string;
+    modelValue?: ModelValue;
 }
 
 const props = withDefaults(defineProps<Props>(), {
     nativeType: 'text'
 });
 
-const emits = defineEmits<{ (e: 'update:modelValue', value: string): void }>();
+const emits = defineEmits<{ (e: 'update:modelValue', value: ModelValue): void }>();
 
-const updateValue = (value: string) => {
-    emits('update:modelValue', value);
+const updateValue = (value: ModelValue) => {
+    const modelValue = props.nativeType === 'number' ? Number(value) : value;
+    emits('update:modelValue', modelValue);
 };
 
 const inputElement = ref<null | HTMLInputElement>(null);

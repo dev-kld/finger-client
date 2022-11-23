@@ -10,12 +10,10 @@
 
                 <div class="accounts-list">
                     <div class="accounts-list__header">
-                        <BaseButton type="secondary" class="accounts-list__button" @click="() => router.push({ name: 'CreateAccount' })">
-                            Добавить счет
-                        </BaseButton>
+                        <BaseButton type="secondary" class="accounts-list__button" @click="handleAddAccount"> Добавить счет </BaseButton>
                     </div>
 
-                    <AccountsGrid />
+                    <AccountsGrid :columns="accountsGridColumns" />
                 </div>
             </template>
 
@@ -35,9 +33,30 @@ import BaseButton from '~/components/Base/BaseButton.vue';
 import AccountsGrid from '~/components/Accounts/AccountsGrid.vue';
 import BaseHeader from '~/components/Base/BaseHeader.vue';
 import { useUser } from '~/composables/user';
+import { useBreakpoints } from '@vueuse/core';
+import { BREAKPOINTS } from '~/helpers/constants';
+import { computed } from 'vue';
 
 const router = useRouter();
 const user = useUser();
+
+const breakpoints = useBreakpoints(BREAKPOINTS);
+const accountsGridColumns = computed(() => {
+    if (breakpoints.tablet.value) {
+        return 4;
+    }
+
+    return 2;
+});
+
+const handleAddAccount = () => {
+    if (breakpoints.tablet.value) {
+        console.log('hello');
+        return;
+    }
+
+    router.push({ name: 'CreateAccount' });
+};
 
 const hasAccounts = true;
 </script>

@@ -16,7 +16,8 @@ const router = createRouter({
             name: 'SignIn',
             meta: {
                 authRoute: true,
-                bottomMenuHidden: true
+                bottomMenuHidden: true,
+                headerHidden: true
             },
             component: () => import('~/views/sign-in.vue')
         },
@@ -25,7 +26,8 @@ const router = createRouter({
             name: 'SignUp',
             meta: {
                 authRoute: true,
-                bottomMenuHidden: true
+                bottomMenuHidden: true,
+                headerHidden: true
             },
             component: () => import('~/views/sign-up.vue')
         },

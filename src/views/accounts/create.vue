@@ -5,12 +5,31 @@
                 <template #title>Создать счет</template>
             </BaseHeader>
 
+            <pre>{{ form }}</pre>
+
             <form class="create-account__form">
-                <BaseInput append-icon="book" placeholder="Название счета" class="create-account__field" />
-                <BaseInput append-icon="money" placeholder="Начальный баланс" type="number" class="create-account__field" />
-                <BaseInput append-icon="globe" placeholder="Валюта счета" class="create-account__field" />
-                <BaseInput append-icon="wallet" placeholder="Тип счета" class="create-account__field" />
-                <BaseSelect append-icon="wallet" :items="selectItems" placeholder="Выберите что-нибудь" class="create-account__field" />
+                <BaseInput v-model="form.name" append-icon="book" placeholder="Название счета" class="create-account__field" />
+                <BaseInput
+                    v-model="form.balance"
+                    append-icon="money"
+                    placeholder="Начальный баланс"
+                    native-type="number"
+                    class="create-account__field"
+                />
+                <BaseSelect
+                    v-model="form.currency"
+                    append-icon="wallet"
+                    :items="currencies"
+                    placeholder="Валюта счета"
+                    class="create-account__field"
+                />
+                <BaseSelect
+                    v-model="form.accountType"
+                    append-icon="wallet"
+                    :items="accountTypes"
+                    placeholder="Тип счета"
+                    class="create-account__field"
+                />
 
                 <BaseButton type="primary" class="create-account__button">Создать</BaseButton>
             </form>
@@ -19,18 +38,37 @@
 </template>
 
 <script lang="ts" setup>
-import type { SelectItem } from '~/components/Base/BaseSelect.vue';
 import BaseInput from '~/components/Base/BaseInput.vue';
 import BaseButton from '~/components/Base/BaseButton.vue';
-import BaseSelect from '~/components/Base/BaseSelect.vue';
 import BaseHeader from '~/components/Base/BaseHeader.vue';
+import BaseSelect from '~/components/Base/BaseSelect.vue';
+import { computed, reactive } from 'vue';
+import { useStoreApp } from '~/stores/app';
 
-const selectItems: SelectItem[] = [
-    { title: 'Книги', value: 'books', icon: 'book' },
-    { title: 'Учебники', value: 'textbook', icon: 'money' },
-    { title: 'Ручки', value: 'pens', icon: 'book' },
-    { title: 'Деньги', value: 'money', icon: 'money' }
-];
+const appStore = useStoreApp();
+
+const form = reactive({
+    name: '',
+    balance: 0,
+    accountType: 0,
+    currency: 0
+});
+
+const accountTypes = computed(() =>
+    appStore.settings.accountTypes.map((item) => ({
+        ...item,
+        title: item.name,
+        value: item.code
+    }))
+);
+
+const currencies = computed(() => {
+    return appStore.settings.currency.map((item) => ({
+        ...item,
+        title: item.name,
+        value: item.code
+    }));
+});
 </script>
 
 <style lang="scss">

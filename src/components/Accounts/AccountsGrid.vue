@@ -1,18 +1,26 @@
 <template>
-    <div class="accounts-grid">
+    <div class="accounts-grid" :style="{ '--accounts-grid-columns': props.columns }">
         <AccountItem v-for="account in 4" :key="account" class="accounts-grid__item" />
     </div>
 </template>
 
 <script lang="ts" setup>
 import AccountItem from '~/components/Accounts/AccountItem.vue';
+
+interface Props {
+    columns?: number;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    columns: 2
+});
 </script>
 
 <style lang="scss">
 .accounts-grid {
     margin-top: 16px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(var(--accounts-grid-columns), 1fr);
     gap: 16px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <header v-if="breakpoints.tablet.value" class="header">
+    <header v-if="isHeaderShown" class="header">
         <div class="container">
             <div class="header__wrapper">
                 <div class="header-menu">
@@ -14,7 +14,7 @@
 
                 <div class="header-actions">
                     <BaseButton type="primary" size="small" class="header-actions__add">Добавить заметку</BaseButton>
-                    <BaseButton type="secondary" size="small">Профиль</BaseButton>
+                    <BaseButton type="secondary" size="small" @click="() => user.logout()">Выйти из аккаунта</BaseButton>
                 </div>
             </div>
         </div>
@@ -27,11 +27,22 @@ import BaseButton from '~/components/Base/BaseButton.vue';
 import { useNavigation } from '~/composables/navigation';
 import { useBreakpoints } from '@vueuse/core';
 import { BREAKPOINTS } from '~/helpers/constants';
+import { useUser } from '~/composables/user';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 
 const navigation = useNavigation();
 const navigationList = [navigation.home, navigation.analytics, navigation.history];
 
 const breakpoints = useBreakpoints(BREAKPOINTS);
+
+const isHeaderShown = computed(() => {
+    return breakpoints.tablet.value && !route.meta.headerHidden;
+});
+
+const user = useUser();
 </script>
 
 <style lang="scss">

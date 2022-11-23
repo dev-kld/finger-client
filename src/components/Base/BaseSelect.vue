@@ -44,7 +44,7 @@ import SvgIcon from '~/components/Common/SvgIcon.vue';
 export interface SelectItem {
     icon?: string;
     title: string;
-    value: any;
+    [key: string]: any;
 }
 
 interface Props {
@@ -67,13 +67,22 @@ const currentPlaceholder = computed(() => {
     return props.placeholder;
 });
 
+const emits = defineEmits<{ (e: 'update:modelValue', value: SelectItem | null): void }>();
+const updateValue = (value: SelectItem | null) => {
+    emits('update:modelValue', value);
+};
+
 const handleSelectItem = (item: SelectItem) => {
     if (item.value !== selectedItem.value?.value) {
         selectedItem.value = item;
     }
 
+    updateValue(selectedItem.value);
+
     isDropdownShown.value = false;
 };
+
+updateValue(selectedItem.value);
 </script>
 
 <style lang="scss">
@@ -159,6 +168,7 @@ $padding-x: 16px;
     margin-top: 4px;
     max-height: 200px;
     overflow-y: scroll;
+    z-index: 10;
 }
 
 .select-item {
