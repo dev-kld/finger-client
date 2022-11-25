@@ -38,7 +38,7 @@ const props = withDefaults(defineProps<Props>(), {
 .button {
     height: 40px;
     padding: 0 16px;
-    border-radius: 8px;
+    border-radius: var(--app-base-element-border-radius);
     font-size: 13px;
     transition: background 0.2s ease-in-out;
 

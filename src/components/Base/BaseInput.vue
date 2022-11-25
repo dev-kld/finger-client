@@ -58,7 +58,7 @@ const inputElement = ref<null | HTMLInputElement>(null);
     align-items: center;
     background: var(--color-background-lighter);
     font-size: 13px;
-    border-radius: 16px;
+    border-radius: var(--app-base-element-border-radius);
     height: 40px;
     padding: 0 $padding-x;
 

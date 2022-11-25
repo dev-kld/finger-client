@@ -71,7 +71,7 @@ const currentPlaceholder = computed(() => {
 
 const emits = defineEmits<{ (e: 'update:modelValue', value: SelectItem | null): void }>();
 const updateValue = (value: SelectItem | null) => {
-    emits('update:modelValue', props.modelKey ? value?.[props.modelKey] : value);
+    emits('update:modelValue', props.modelKey && value?.[props.modelKey] ? value?.[props.modelKey] : value);
 };
 
 const handleSelectItem = (item: SelectItem) => {
@@ -129,7 +129,7 @@ $padding-x: 16px;
     $self: &;
 
     background: var(--color-background-lighter);
-    border-radius: 16px;
+    border-radius: var(--app-base-element-border-radius);
 
     height: 40px;
     display: flex;

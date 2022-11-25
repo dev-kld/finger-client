@@ -20,6 +20,7 @@
                     :items="appStore.settings.currency"
                     title-key="name"
                     id-key="code"
+                    model-key="code"
                     placeholder="Валюта счета"
                     class="create-account__field"
                 />
@@ -29,6 +30,7 @@
                     :items="appStore.settings.accountTypes"
                     title-key="name"
                     id-key="code"
+                    model-key="code"
                     placeholder="Тип счета"
                     class="create-account__field"
                 />
@@ -57,7 +59,7 @@ const accountStore = useStoreAccount();
 
 const form = reactive<Nullable<AccountCandidate>>({
     name: null,
-    initialBalance: 0,
+    initialBalance: null,
     accountType: null,
     currency: null
 });

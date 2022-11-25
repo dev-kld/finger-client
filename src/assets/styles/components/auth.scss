@@ -49,3 +49,11 @@
         }
     }
 }
+
+@media (min-width: #{map-get($breakpoints, 'tablet')}) {
+    .auth {
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
