@@ -8,7 +8,7 @@
             <form class="create-account__form" @submit.prevent="handleSubmitForm">
                 <BaseInput v-model="form.name" append-icon="book" placeholder="Название счета" class="create-account__field" />
                 <BaseInput
-                    v-model="form.balance"
+                    v-model="form.initialBalance"
                     append-icon="money"
                     placeholder="Начальный баланс"
                     native-type="number"
@@ -57,7 +57,7 @@ const accountStore = useStoreAccount();
 
 const form = reactive<Nullable<AccountCandidate>>({
     name: null,
-    balance: 0,
+    initialBalance: 0,
     accountType: null,
     currency: null
 });

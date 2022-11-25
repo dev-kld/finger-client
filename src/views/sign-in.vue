@@ -5,7 +5,7 @@
 
             <form class="auth__form" @submit.prevent="handleFormSubmit">
                 <div class="auth-fields">
-                    <BaseInput v-model="form.login" placeholder="Введите email" append-icon="user" class="auth-fields__item" />
+                    <BaseInput v-model="form.email" placeholder="Введите email" append-icon="user" class="auth-fields__item" />
                     <div class="auth-fields__item">
                         <BaseInput v-model="form.password" native-type="password" placeholder="Введите пароль" append-icon="lock" />
                         <RouterLink to="/" class="auth-fields__reset-password">Забыли пароль?</RouterLink>
@@ -40,7 +40,7 @@ const userStore = useStoreUser();
 const user = useUser();
 
 const form = reactive<UserSignInData>({
-    login: '',
+    email: '',
     password: ''
 });
 

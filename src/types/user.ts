@@ -1,16 +1,16 @@
 export interface UserData {
     id: number;
-    login: string;
+    email: string;
     name: string;
 }
 
 export interface UserSignUpData {
-    login: UserData['login'];
+    email: UserData['email'];
     name: UserData['name'];
     password: string;
 }
 
 export interface UserSignInData {
-    login: UserData['login'];
+    email: UserData['email'];
     password: string;
 }

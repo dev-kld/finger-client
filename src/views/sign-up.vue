@@ -5,7 +5,7 @@
 
             <form class="auth__form" @submit.prevent="handleFormSubmit">
                 <div class="auth-fields">
-                    <BaseInput v-model="form.login" placeholder="Введите логин" append-icon="user" class="auth-fields__item" />
+                    <BaseInput v-model="form.email" placeholder="Введите логин" append-icon="user" class="auth-fields__item" />
                     <BaseInput v-model="form.name" placeholder="Введите имя" append-icon="user" class="auth-fields__item" />
                     <BaseInput
                         v-model="form.password"
@@ -57,7 +57,7 @@ const user = useUser();
 const router = useRouter();
 
 const form = reactive<UserSignUpData & { passwordRepeat: string }>({
-    login: '',
+    email: '',
     name: '',
     password: '',
     passwordRepeat: ''
@@ -69,7 +69,7 @@ const handleFormSubmit = async () => {
     isSubmitting.value = true;
 
     const formData: UserSignUpData = {
-        login: form.login,
+        email: form.email,
         name: form.name,
         password: form.password
     };
