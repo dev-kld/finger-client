@@ -10,7 +10,9 @@
 
                 <div class="accounts-list">
                     <div class="accounts-list__header">
-                        <BaseButton type="secondary" class="accounts-list__button" @click="handleAddAccount"> Добавить счет </BaseButton>
+                        <BaseButton type="secondary" size="small" class="accounts-list__button" @click="handleAddAccount">
+                            Добавить счет
+                        </BaseButton>
                     </div>
 
                     <AccountsGrid :accounts="appStore.accounts" :columns="accountsGridColumns" />
@@ -18,10 +20,12 @@
             </template>
 
             <template v-else>
-                <div class="home__title">На вашем аккаунте пока нет счетов</div>
-                <BaseButton type="primary" class="home__button" @click="() => router.push({ name: 'CreateAccount' })">
-                    Добавить счет
-                </BaseButton>
+                <div class="home-empty">
+                    <div class="home-empty__title">На вашем аккаунте пока нет счетов</div>
+                    <BaseButton type="primary" class="home-empty__button" @click="() => router.push({ name: 'CreateAccount' })">
+                        Добавить счет
+                    </BaseButton>
+                </div>
             </template>
         </div>
     </div>
@@ -72,13 +76,16 @@ const handleAddAccount = () => {
 }
 
 .home {
-    $self: &;
-
-    &--empty {
+    &-empty {
         text-align: center;
         font-weight: 700;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 100%;
+        transform: translate(-50%, -50%);
 
-        #{$self}__button {
+        &__button {
             margin-top: 16px;
         }
     }
