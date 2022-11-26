@@ -59,6 +59,7 @@ const props = withDefaults(defineProps<Props>(), {
     &--secondary {
         background: var(--color-background-lighter);
         color: var(--color-white);
+        border: 1px solid var(--color-background-lighter);
 
         &:hover {
             background: var(--color-background);

@@ -2,6 +2,7 @@ import { useCookies } from '@vueuse/integrations/useCookies';
 import { useRouter } from 'vue-router';
 import { COOKIE_ACCESS_TOKEN_EXPIRING_KEY, COOKIE_ACCESS_TOKEN_KEY } from '~/helpers/constants';
 import { axiosInstance } from '~/services/http';
+import { useStoreAccount } from '~/stores/account';
 import { useStoreApp } from '~/stores/app';
 import { useStoreUser } from '~/stores/user';
 import type { ApiResponseAuthorization } from '~/types/api';
@@ -10,6 +11,7 @@ export const useUser = () => {
     const cookies = useCookies();
     const userStore = useStoreUser();
     const appStore = useStoreApp();
+    const accountStore = useStoreAccount();
 
     const router = useRouter();
 
@@ -19,8 +21,7 @@ export const useUser = () => {
 
         axiosInstance.defaults.headers.common['Authorization'] = data.accessToken;
 
-        await appStore.fetchSettings();
-        await userStore.$patch({ user: data.user });
+        await Promise.all([userStore.$patch({ user: data.user }), appStore.fetchSettings(), accountStore.fetchAccounts()]);
         router.push({ name: 'Home' });
     };
 

@@ -32,6 +32,12 @@ input {
     outline: none;
 }
 
+button,
+select,
+input {
+    user-select: none;
+}
+
 h1,
 h2,
 h3,

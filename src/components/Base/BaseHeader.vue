@@ -6,9 +6,13 @@
                 <span class="header-user__name">{{ userStore.user?.name }}</span>
             </div>
 
-            <div v-if="props.type === 'history'" class="header-back" @click="() => router.go(-1)">
+            <div v-else-if="props.type === 'history'" class="header-back" @click="() => router.go(-1)">
                 <SvgIcon name="arrow-left" class="header-back__icon" />
                 <span class="header-back__title">Назад</span>
+            </div>
+
+            <div v-else-if="props.type === 'title'" class="header-title">
+                <slot></slot>
             </div>
 
             <div v-if="$slots.prepend" class="header__prepend">
@@ -30,7 +34,7 @@ import { BREAKPOINTS } from '~/helpers/constants';
 import { useStoreUser } from '~/stores/user';
 
 interface Props {
-    type?: 'user' | 'history';
+    type: 'user' | 'history' | 'title';
 }
 
 const userStore = useStoreUser();
@@ -79,5 +83,10 @@ const breakpoints = useBreakpoints(BREAKPOINTS);
         font-weight: 700;
         margin-left: 12px;
     }
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: 700;
 }
 </style>

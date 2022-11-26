@@ -14,11 +14,11 @@ export const useStoreAccount = defineStore('account', {
 
     actions: {
         async fetchAccounts() {
-            try {
-                if (this.accounts) {
-                    return;
-                }
+            if (this.accounts) {
+                return;
+            }
 
+            try {
                 const response = await axiosInstance.get<ApiResponseAccounts>('/accounts');
                 this.accounts = response.data.accounts;
             } catch (error) {

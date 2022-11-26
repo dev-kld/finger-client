@@ -4,33 +4,27 @@
 $colors: (
     background: #171930,
     background-lighter: #1e203b,
-    background-darker: #0d0f22,
+    background-darker: #13162c,
     primary: #3e6fef,
     primary-darker: darken(#3e6fef, 5%),
     secondary: #8fc9ff,
     secondary-darker: darken(#8fc9ff, 5%),
-    light: #ffffff
+    light: #ffffff,
+    border: #3e4166
 );
 
 :root {
     --color-background: #{map-get($colors, 'background')};
     --color-background-lighter: #{map-get($colors, 'background-lighter')};
     --color-background-darker: #{map-get($colors, 'background-darker')};
-
     --color-primary: #{map-get($colors, 'primary')};
     --color-primary-darker: #{map-get($colors, 'primary-darker')};
-
     --color-secondary: #{map-get($colors, 'secondary')};
-
     --color-white: #{map-get($colors, 'light')};
+    --color-border: #{map-get($colors, 'border')};
 }
 
 :root {
-    --color-background-rgb: #{HexToRGB(map-get($colors, 'background'))};
-    --color-background-lighter-rgb: #{HexToRGB(map-get($colors, 'background-lighter'))};
-    --color-background-darker-rgb: #{HexToRGB(map-get($colors, 'background-darker'))};
-    --color-primary-rgb: #{HexToRGB(map-get($colors, 'primary'))};
-    --color-secondary-rgb: #{HexToRGB(map-get($colors, 'secondary'))};
     --color-white-rgb: #{HexToRGB(map-get($colors, 'light'))};
 }
 

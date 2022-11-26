@@ -1,12 +1,8 @@
 <template>
-    <div class="home" :class="[{ 'home--empty': !appStore.accounts }]">
+    <div class="home" :class="[{ 'home--empty': !accountStore.accounts }]">
         <div class="container">
-            <template v-if="appStore.accounts">
-                <BaseHeader type="user">
-                    <template #prepend>
-                        <BaseButton type="secondary" size="small" @click="() => user.logout()">Выйти из аккаунта</BaseButton>
-                    </template>
-                </BaseHeader>
+            <template v-if="accountStore.accounts">
+                <BaseHeader type="user" />
 
                 <div class="accounts-list">
                     <div class="accounts-list__header">
@@ -15,7 +11,7 @@
                         </BaseButton>
                     </div>
 
-                    <AccountsGrid :accounts="appStore.accounts" :columns="accountsGridColumns" />
+                    <AccountsGrid :accounts="accountStore.accounts" :columns="accountsGridColumns" />
                 </div>
             </template>
 
@@ -36,17 +32,15 @@ import { useRouter } from 'vue-router';
 import BaseButton from '~/components/Base/BaseButton.vue';
 import AccountsGrid from '~/components/Accounts/AccountsGrid.vue';
 import BaseHeader from '~/components/Base/BaseHeader.vue';
-import { useUser } from '~/composables/user';
 import { useBreakpoints } from '@vueuse/core';
 import { BREAKPOINTS } from '~/helpers/constants';
 import { computed } from 'vue';
 import { useStoreAccount } from '~/stores/account';
 
-const appStore = useStoreAccount();
+const accountStore = useStoreAccount();
 const router = useRouter();
-const user = useUser();
 
-appStore.fetchAccounts();
+accountStore.fetchAccounts();
 
 const breakpoints = useBreakpoints(BREAKPOINTS);
 const accountsGridColumns = computed(() => {

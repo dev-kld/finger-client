@@ -5,7 +5,7 @@
 
             <form class="auth__form" @submit.prevent="handleFormSubmit">
                 <div class="auth-fields">
-                    <BaseInput v-model="form.email" placeholder="Введите логин" append-icon="user" class="auth-fields__item" />
+                    <BaseInput v-model="form.email" placeholder="Введите Email" append-icon="user" class="auth-fields__item" />
                     <BaseInput v-model="form.name" placeholder="Введите имя" append-icon="user" class="auth-fields__item" />
                     <BaseInput
                         v-model="form.password"

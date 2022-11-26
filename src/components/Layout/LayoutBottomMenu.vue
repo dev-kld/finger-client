@@ -12,7 +12,7 @@
                 <RouterLink
                     v-for="(navItem, navIndex) in navigationList.slice(2, navigationList.length)"
                     :key="navIndex"
-                    to="/"
+                    :to="navItem.to"
                     class="menu-item"
                 >
                     <SvgIcon :name="navItem.icon" class="menu-item__icon" />

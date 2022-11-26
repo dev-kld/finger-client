@@ -1,10 +1,20 @@
+import type { RouteRecord } from 'vue-router';
+
+interface NavigationItem {
+    [key: string]: {
+        icon: string;
+        title: string;
+        to: Pick<RouteRecord, 'name'>;
+    };
+}
+
 export const useNavigation = () => {
-    const navigation = {
-        home: { icon: 'home', title: 'Главная' },
-        analytics: { icon: 'activity', title: 'Аналитика' },
-        history: { icon: 'book', title: 'История' },
-        profile: { icon: 'user', title: 'Профиль' }
-    } as const;
+    const navigation: NavigationItem = {
+        home: { icon: 'home', title: 'Главная', to: { name: 'Home' } },
+        analytics: { icon: 'activity', title: 'Аналитика', to: { name: 'Home' } },
+        history: { icon: 'book', title: 'История', to: { name: 'Home' } },
+        profile: { icon: 'user', title: 'Профиль', to: { name: 'Profile' } }
+    };
 
     return navigation;
 };

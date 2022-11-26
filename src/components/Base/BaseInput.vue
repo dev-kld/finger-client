@@ -3,7 +3,9 @@
         class="input"
         :class="[
             {
-                'input--has-append-icon': props.appendIcon
+                'input--has-append-icon': props.appendIcon,
+                'input--disabled': props.disabled,
+                'input--focused': isFocused
             }
         ]"
         @click="() => inputElement?.focus()"
@@ -16,6 +18,9 @@
                 :type="props.nativeType"
                 :placeholder="props.placeholder"
                 :value="props.modelValue"
+                :disabled="props.disabled"
+                @focus="isFocused = true"
+                @blur="isFocused = false"
                 @input="updateValue(($event.target as HTMLInputElement).value)"
             />
         </div>
@@ -33,6 +38,7 @@ interface Props {
     appendIcon?: string;
     nativeType?: InputHTMLAttributes['type'];
     modelValue?: ModelValue;
+    disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -47,6 +53,7 @@ const updateValue = (value: ModelValue) => {
 };
 
 const inputElement = ref<null | HTMLInputElement>(null);
+const isFocused = ref(false);
 </script>
 
 <style lang="scss">
@@ -81,6 +88,15 @@ const inputElement = ref<null | HTMLInputElement>(null);
         #{$self}__icon {
             margin-right: 8px;
         }
+    }
+
+    &--disabled {
+        opacity: 0.5;
+        border: 1px solid var(--color-border);
+    }
+
+    &--focused {
+        background: var(--color-background-darker);
     }
 }
 </style>
