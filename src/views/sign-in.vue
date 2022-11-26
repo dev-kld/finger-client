@@ -53,7 +53,7 @@ const handleFormSubmit = async () => {
         const response = await userStore.signIn(form);
         user.signIn(response.data);
     } catch (e) {
-        console.log(e);
+        console.error(e);
     }
 
     isSubmitting.value = false;

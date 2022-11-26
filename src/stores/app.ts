@@ -20,7 +20,7 @@ export const useStoreApp = defineStore('app', {
                 const response = await axiosInstance.get<ApiResponseSettings>('/settings');
                 this.settings = response.data;
             } catch (e) {
-                console.log(e);
+                console.error(e);
             }
         }
     }

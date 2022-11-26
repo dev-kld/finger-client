@@ -43,7 +43,7 @@ const onAppInit = async () => {
     try {
         await Promise.all([userStore.fetchUserData(), appStore.fetchSettings()]);
     } catch (e) {
-        console.log(e);
+        console.error(e);
     }
 };
 

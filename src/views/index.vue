@@ -53,7 +53,6 @@ const accountsGridColumns = computed(() => {
 
 const handleAddAccount = () => {
     if (breakpoints.tablet.value) {
-        console.log('hello');
         return;
     }
 

@@ -22,7 +22,7 @@ export const useStoreAccount = defineStore('account', {
                 const response = await axiosInstance.get<ApiResponseAccounts>('/accounts');
                 this.accounts = response.data.accounts;
             } catch (error) {
-                console.log(error);
+                console.error(error);
             }
         },
 
@@ -30,7 +30,7 @@ export const useStoreAccount = defineStore('account', {
             try {
                 await axiosInstance.post('/accounts', data);
             } catch (error) {
-                console.log(error);
+                console.error(error);
             }
         }
     }

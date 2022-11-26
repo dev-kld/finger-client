@@ -80,7 +80,7 @@ const handleFormSubmit = async () => {
 
         user.signIn(responseData);
     } catch (e) {
-        console.log(e);
+        console.error(e);
     }
 
     isSubmitting.value = false;
