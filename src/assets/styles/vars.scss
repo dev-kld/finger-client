@@ -10,7 +10,9 @@ $colors: (
     secondary: #8fc9ff,
     secondary-darker: darken(#8fc9ff, 5%),
     light: #ffffff,
-    border: #3e4166
+    border: #3e4166,
+    danger: #ff3f3f,
+    success: #3fff69
 );
 
 :root {
@@ -22,10 +24,13 @@ $colors: (
     --color-secondary: #{map-get($colors, 'secondary')};
     --color-white: #{map-get($colors, 'light')};
     --color-border: #{map-get($colors, 'border')};
+    --color-danger: #{map-get($colors, 'danger')};
+    --color-success: #{map-get($colors, 'success')};
 }
 
 :root {
     --color-white-rgb: #{HexToRGB(map-get($colors, 'light'))};
+    --color-danger-rgb: #{HexToRGB(map-get($colors, 'danger'))};
 }
 
 :root {
