@@ -11,7 +11,15 @@
                         </BaseButton>
                     </div>
 
-                    <AccountsGrid :accounts="accountStore.accounts" :columns="accountsGridColumns" />
+                    <AccountsGrid :columns="accountsGridColumns">
+                        <AccountItem
+                            v-for="account in accountStore.accounts"
+                            :key="account.id"
+                            :account="account"
+                            class="accounts-grid__item"
+                            @click="() => router.push({ name: 'AccountDetails', params: { id: account.id } })"
+                        />
+                    </AccountsGrid>
                 </div>
             </template>
 
@@ -36,6 +44,7 @@ import { useBreakpoints } from '@vueuse/core';
 import { BREAKPOINTS } from '~/helpers/constants';
 import { computed } from 'vue';
 import { useStoreAccount } from '~/stores/account';
+import AccountItem from '~/components/Accounts/AccountItem.vue';
 
 const accountStore = useStoreAccount();
 const router = useRouter();

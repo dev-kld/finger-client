@@ -51,6 +51,10 @@ const breakpoints = useBreakpoints(BREAKPOINTS);
         font-weight: 700;
         margin-top: 32px;
     }
+
+    &__prepend {
+        display: flex;
+    }
 }
 
 .header-back {
