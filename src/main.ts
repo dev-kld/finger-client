@@ -41,7 +41,7 @@ const onAppInit = async () => {
     axiosInstance.defaults.headers.common['Authorization'] = accessToken;
 
     try {
-        await Promise.all([userStore.fetchUserData(), appStore.fetchSettings()]);
+        await Promise.all([userStore.fetchUserData(), appStore.fetchBase()]);
     } catch (e) {
         console.error(e);
     }

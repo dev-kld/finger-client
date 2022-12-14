@@ -1,4 +1,4 @@
-import type { AccountType, Currency } from './global';
+import type { Currency } from './app';
 
 export interface Account {
     id: number;
@@ -6,7 +6,6 @@ export interface Account {
     initialBalance: number;
     balance: number;
     currency: Currency['code'];
-    accountType: AccountType['code'];
 }
 
-export type AccountCandidate = Pick<Account, 'name' | 'initialBalance' | 'accountType' | 'currency'>;
+export type AccountCandidate = Pick<Account, 'name' | 'initialBalance' | 'currency'>;

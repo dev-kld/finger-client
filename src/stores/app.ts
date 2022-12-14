@@ -1,28 +1,27 @@
 import { defineStore } from 'pinia';
 import { axiosInstance } from '~/services/http';
-import type { ApiResponseSettings } from '~/types/api';
+import type { ApiResponseBase } from '~/types/api';
 import type { Notification } from '~/components/Common/ToastNotification.vue';
 import { uid } from 'uid/single';
 
 interface State {
-    settings: ApiResponseSettings;
+    base: ApiResponseBase;
     notifications: Notification[];
 }
 
 export const useStoreApp = defineStore('app', {
     state: (): State => ({
-        settings: {
-            currency: [],
-            accountTypes: []
+        base: {
+            currencies: []
         },
         notifications: []
     }),
 
     actions: {
-        async fetchSettings() {
+        async fetchBase() {
             try {
-                const response = await axiosInstance.get<ApiResponseSettings>('/settings');
-                this.settings = response.data;
+                const response = await axiosInstance.get<ApiResponseBase>('/base');
+                this.base = response.data;
             } catch (e) {
                 console.error(e);
             }

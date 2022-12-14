@@ -17,23 +17,23 @@
                 <BaseSelect
                     v-model="form.currency"
                     append-icon="wallet"
-                    :items="appStore.settings.currency"
+                    :items="appStore.base.currencies"
                     title-key="name"
                     id-key="code"
                     model-key="code"
                     placeholder="Валюта счета"
                     class="create-account__field"
                 />
-                <BaseSelect
+                <!-- <BaseSelect
                     v-model="form.accountType"
                     append-icon="wallet"
-                    :items="appStore.settings.accountTypes"
+                    :items="appStore.base.accountTypes"
                     title-key="name"
                     id-key="code"
                     model-key="code"
                     placeholder="Тип счета"
                     class="create-account__field"
-                />
+                /> -->
 
                 <BaseButton type="primary" native-type="submit" class="create-account__button">Создать</BaseButton>
             </form>
@@ -60,7 +60,6 @@ const accountStore = useStoreAccount();
 const form = reactive<Nullable<AccountCandidate>>({
     name: null,
     initialBalance: null,
-    accountType: null,
     currency: null
 });
 

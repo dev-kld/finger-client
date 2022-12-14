@@ -1,16 +1,15 @@
 import type { Account } from './account';
-import type { AccountType, Currency } from './global';
+import type { Currency } from './app';
 import type { UserData } from './user';
 
 export interface ApiResponseAuthorization {
     accessToken: string;
-    accessTokenExpiredAt: string;
+    accessTokenExpiredAt: number;
     user: UserData;
 }
 
-export interface ApiResponseSettings {
-    currency: Currency[];
-    accountTypes: AccountType[];
+export interface ApiResponseBase {
+    currencies: Currency[];
 }
 
 export interface ApiResponseAccounts {

@@ -14,16 +14,16 @@ export const useStoreUser = defineStore('user', {
 
     actions: {
         signUp(data: UserSignUpData) {
-            return axiosInstance.post<ApiResponseAuthorization>('/auth/register', data);
+            return axiosInstance.post<ApiResponseAuthorization>('/user/sign-up', data);
         },
 
         signIn(data: UserSignInData) {
-            return axiosInstance.post<ApiResponseAuthorization>('/auth/login', data);
+            return axiosInstance.post<ApiResponseAuthorization>('/user/sign-in', data);
         },
 
         async fetchUserData() {
             try {
-                const response = await axiosInstance.get<{ user: UserData }>('/auth/check-token');
+                const response = await axiosInstance.get<{ user: UserData }>('/user/data');
                 this.user = response.data.user;
             } catch (e) {
                 console.error(e);

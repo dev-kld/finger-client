@@ -49,7 +49,7 @@ import AccountItem from '~/components/Accounts/AccountItem.vue';
 const accountStore = useStoreAccount();
 const router = useRouter();
 
-accountStore.fetchAccounts();
+// accountStore.fetchAccounts();
 
 const breakpoints = useBreakpoints(BREAKPOINTS);
 const accountsGridColumns = computed(() => {

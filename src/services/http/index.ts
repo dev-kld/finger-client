@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { vApi } from '~/config';
 import { useStoreApp } from '~/stores/app';
 
 const axiosInstance = axios.create({
-    baseURL: `http://boilerplate-manager.herokuapp.com/${vApi}`,
+    baseURL: 'http://localhost:3001/api',
     timeout: 1000 * 30,
     headers: {
         'Content-Type': 'application/json'
