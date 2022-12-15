@@ -14,10 +14,10 @@
                     <AccountsGrid :columns="accountsGridColumns">
                         <AccountItem
                             v-for="account in accountStore.accounts"
-                            :key="account.id"
+                            :key="account._id"
                             :account="account"
                             class="accounts-grid__item"
-                            @click="() => router.push({ name: 'AccountDetails', params: { id: account.id } })"
+                            @click="() => router.push({ name: 'AccountDetails', params: { id: account._id } })"
                         />
                     </AccountsGrid>
                 </div>

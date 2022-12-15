@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Size } from '~/types/global';
+import type { Size } from '~/types/app';
 
 interface Props {
     size?: Size;

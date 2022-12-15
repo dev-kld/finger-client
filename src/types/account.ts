@@ -1,11 +1,11 @@
 import type { Currency } from './app';
 
 export interface Account {
-    id: number;
+    _id: string;
     name: string;
     initialBalance: number;
     balance: number;
-    currency: Currency['code'];
+    currencyCode: Currency['code'];
 }
 
-export type AccountCandidate = Pick<Account, 'name' | 'initialBalance' | 'currency'>;
+export type AccountCandidate = Pick<Account, 'name' | 'initialBalance' | 'currencyCode'>;

@@ -23,7 +23,7 @@
 
 <script lang="ts" setup>
 import type { ButtonHTMLAttributes } from 'vue';
-import type { Size } from '~/types/global';
+import type { Size } from '~/types/app';
 
 interface Props {
     type: 'primary' | 'secondary';

@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import pathToSprite from '~/assets/generated-sprite.svg';
-import type { Size } from '~/types/global';
+import type { Size } from '~/types/app';
 
 interface Props {
     name: string;

@@ -34,7 +34,7 @@ const props = defineProps<Props>();
 
 const app = useStoreApp();
 
-const currency = computed(() => app.base.currencies.find((c) => c.code === props.account.currency));
+const currency = computed(() => app.base.currencies.find((c) => c.code === props.account.currencyCode));
 </script>
 
 <style lang="scss">

@@ -15,7 +15,7 @@
                     class="create-account__field"
                 />
                 <BaseSelect
-                    v-model="form.currency"
+                    v-model="form.currencyCode"
                     append-icon="wallet"
                     :items="appStore.base.currencies"
                     title-key="name"
@@ -60,7 +60,7 @@ const accountStore = useStoreAccount();
 const form = reactive<Nullable<AccountCandidate>>({
     name: null,
     initialBalance: null,
-    currency: null
+    currencyCode: null
 });
 
 const handleSubmitForm = async () => {
