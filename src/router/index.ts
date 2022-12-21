@@ -32,14 +32,21 @@ const router = createRouter({
             component: () => import('~/views/sign-up.vue')
         },
         {
-            path: '/accounts/create',
-            name: 'CreateAccount',
-            component: () => import('~/views/accounts/create.vue')
-        },
-        {
-            path: '/accounts/:id',
-            name: 'AccountDetails',
-            component: () => import('~/views/accounts/_id.vue')
+            path: '/accounts',
+            name: 'Accounts',
+            redirect: { name: 'Home' },
+            children: [
+                {
+                    path: 'create',
+                    name: 'CreateAccount',
+                    component: () => import('~/views/accounts/create.vue')
+                },
+                {
+                    path: ':id',
+                    name: 'AccountDetails',
+                    component: () => import('~/views/accounts/_id.vue')
+                }
+            ]
         },
         {
             path: '/profile',
