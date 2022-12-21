@@ -53,7 +53,6 @@ interface Props {
     items: { [key: string]: any }[];
     titleKey: string;
     idKey: string;
-    modelKey?: string; // ключ по которому происходит привязка
 }
 
 const props = defineProps<Props>();
@@ -71,7 +70,7 @@ const currentPlaceholder = computed(() => {
 
 const emits = defineEmits<{ (e: 'update:modelValue', value: SelectItem | null): void }>();
 const updateValue = (value: SelectItem | null) => {
-    emits('update:modelValue', props.modelKey && value?.[props.modelKey] ? value?.[props.modelKey] : value);
+    emits('update:modelValue', value);
 };
 
 const handleSelectItem = (item: SelectItem) => {

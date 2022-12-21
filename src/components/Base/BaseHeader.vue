@@ -1,5 +1,5 @@
 <template>
-    <header v-if="!breakpoints.tablet.value" class="header">
+    <header class="header">
         <div class="header__wrapper">
             <div v-if="props.type === 'user'" class="header-user">
                 <div class="header-user__avatar">{{ userStore.user?.name[0].toUpperCase() }}</div>

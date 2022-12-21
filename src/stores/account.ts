@@ -19,7 +19,7 @@ export const useStoreAccount = defineStore('account', {
             }
 
             try {
-                const response = await axiosInstance.get<ApiResponseAccounts>('/accounts');
+                const response = await axiosInstance.get<ApiResponseAccounts>('/account/all');
                 this.accounts = response.data.accounts;
             } catch (error) {
                 console.error(error);
@@ -28,9 +28,26 @@ export const useStoreAccount = defineStore('account', {
 
         async createAccount(data: AccountCandidate) {
             try {
-                await axiosInstance.post('/accounts', data);
+                await axiosInstance.post('/account/create', data);
             } catch (error) {
                 console.error(error);
+            }
+        },
+
+        async deleteAccount(accountId: Account['_id']) {
+            try {
+                const response = await axiosInstance.delete('/account/delete', {
+                    data: {
+                        accountId
+                    }
+                });
+
+                if (response.status === 200 && this.accounts) {
+                    const index = this.accounts.findIndex((o) => o._id === accountId);
+                    this.accounts.splice(index, 1);
+                }
+            } catch (error) {
+                console.log(error);
             }
         }
     }

@@ -13,7 +13,7 @@
             <div class="account-item__name">{{ account.name }}</div>
             <div class="account-item__balance">
                 {{ account.balance }}
-                <span class="account-item__currency">{{ currency?.name }}</span>
+                <span class="account-item__currency">{{ currency?.code.toUpperCase() }}</span>
             </div>
         </div>
     </div>

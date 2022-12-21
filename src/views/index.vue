@@ -2,7 +2,7 @@
     <div class="home" :class="[{ 'home--empty': !accountStore.accounts }]">
         <div class="container">
             <template v-if="accountStore.accounts">
-                <BaseHeader type="user" />
+                <BaseHeader v-if="!breakpoints.tablet.value" type="user" />
 
                 <div class="accounts-list">
                     <div class="accounts-list__header">
@@ -49,7 +49,7 @@ import AccountItem from '~/components/Accounts/AccountItem.vue';
 const accountStore = useStoreAccount();
 const router = useRouter();
 
-// accountStore.fetchAccounts();
+accountStore.fetchAccounts();
 
 const breakpoints = useBreakpoints(BREAKPOINTS);
 const accountsGridColumns = computed(() => {
@@ -61,9 +61,9 @@ const accountsGridColumns = computed(() => {
 });
 
 const handleAddAccount = () => {
-    if (breakpoints.tablet.value) {
-        return;
-    }
+    // if (breakpoints.tablet.value) {
+    //     return;
+    // }
 
     router.push({ name: 'CreateAccount' });
 };

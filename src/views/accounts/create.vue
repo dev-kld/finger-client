@@ -15,27 +15,17 @@
                     class="create-account__field"
                 />
                 <BaseSelect
-                    v-model="form.currencyCode"
+                    :model-value="form.currencyCode"
+                    @update:model-value="form.currencyCode = ($event as Currency)?.code || null"
                     append-icon="wallet"
                     :items="appStore.base.currencies"
                     title-key="name"
                     id-key="code"
-                    model-key="code"
                     placeholder="Валюта счета"
                     class="create-account__field"
                 />
-                <!-- <BaseSelect
-                    v-model="form.accountType"
-                    append-icon="wallet"
-                    :items="appStore.base.accountTypes"
-                    title-key="name"
-                    id-key="code"
-                    model-key="code"
-                    placeholder="Тип счета"
-                    class="create-account__field"
-                /> -->
 
-                <BaseButton type="primary" native-type="submit" class="create-account__button">Создать</BaseButton>
+                <BaseButton :loading="isSubmitting" type="primary" native-type="submit" class="create-account__button">Создать</BaseButton>
             </form>
         </div>
     </div>
@@ -48,10 +38,11 @@ import BaseHeader from '~/components/Base/BaseHeader.vue';
 import BaseSelect from '~/components/Base/BaseSelect.vue';
 import { useStoreApp } from '~/stores/app';
 import { useStoreAccount } from '~/stores/account';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import type { Nullable } from '~/types/global';
 import type { AccountCandidate } from '~/types/account';
 import { useRouter } from 'vue-router';
+import type { Currency } from '~/types/app';
 
 const router = useRouter();
 const appStore = useStoreApp();
@@ -63,10 +54,16 @@ const form = reactive<Nullable<AccountCandidate>>({
     currencyCode: null
 });
 
+const isSubmitting = ref(false);
+
 const handleSubmitForm = async () => {
     if (Object.values(form).every((v) => v !== null)) {
-        await accountStore.createAccount(form as NonNullable<AccountCandidate>);
+        isSubmitting.value = true;
+
+        await accountStore.createAccount(form as AccountCandidate);
         router.push({ name: 'Home' });
+
+        isSubmitting.value = false;
     }
 };
 </script>
