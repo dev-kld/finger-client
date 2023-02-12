@@ -13,7 +13,14 @@
                 </div>
 
                 <div class="header-actions">
-                    <BaseButton type="primary" size="small" class="header-actions__add">Добавить заметку</BaseButton>
+                    <BaseButton
+                        type="primary"
+                        size="small"
+                        class="header-actions__add"
+                        @click="() => router.push({ name: 'CreateRecord' })"
+                    >
+                        Добавить запись
+                    </BaseButton>
                     <BaseButton type="secondary" size="small" @click="() => user.logout()">Выйти из аккаунта</BaseButton>
                 </div>
             </div>
@@ -29,9 +36,10 @@ import { useBreakpoints } from '@vueuse/core';
 import { BREAKPOINTS } from '~/helpers/constants';
 import { useUser } from '~/composables/user';
 import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
+const router = useRouter();
 
 const navigation = useNavigation();
 const navigationList = [navigation.home, navigation.analytics, navigation.history];

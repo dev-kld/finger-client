@@ -49,6 +49,10 @@ export const useStoreAccount = defineStore('account', {
             } catch (error) {
                 console.log(error);
             }
+        },
+
+        getAccountById(accountId: Account['_id']) {
+            return this.accounts?.find((account) => account._id === accountId);
         }
     }
 });

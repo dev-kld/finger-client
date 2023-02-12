@@ -7,7 +7,7 @@
                 <div class="accounts-list">
                     <div class="accounts-list__header">
                         <BaseButton type="secondary" size="small" class="accounts-list__button" @click="handleAddAccount">
-                            Добавить счет
+                            Создать счет
                         </BaseButton>
                     </div>
 
@@ -16,7 +16,6 @@
                             v-for="account in accountStore.accounts"
                             :key="account._id"
                             :account="account"
-                            class="accounts-grid__item"
                             @click="() => router.push({ name: 'AccountDetails', params: { id: account._id } })"
                         />
                     </AccountsGrid>
@@ -27,7 +26,7 @@
                 <div class="home-empty">
                     <div class="home-empty__title">На вашем аккаунте пока нет счетов</div>
                     <BaseButton type="primary" class="home-empty__button" @click="() => router.push({ name: 'CreateAccount' })">
-                        Добавить счет
+                        Создать счет
                     </BaseButton>
                 </div>
             </template>

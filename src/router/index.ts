@@ -7,11 +7,6 @@ const router = createRouter({
     linkExactActiveClass: '',
     routes: [
         {
-            path: '/',
-            name: 'Home',
-            component: () => import('~/views/index.vue')
-        },
-        {
             path: '/sign-in',
             name: 'SignIn',
             meta: {
@@ -32,6 +27,16 @@ const router = createRouter({
             component: () => import('~/views/sign-up.vue')
         },
         {
+            path: '/',
+            name: 'Home',
+            component: () => import('~/views/index.vue')
+        },
+        {
+            path: '/profile',
+            name: 'Profile',
+            component: () => import('~/views/profile/index.vue')
+        },
+        {
             path: '/accounts',
             name: 'Accounts',
             redirect: { name: 'Home' },
@@ -49,9 +54,16 @@ const router = createRouter({
             ]
         },
         {
-            path: '/profile',
-            name: 'Profile',
-            component: () => import('~/views/profile/index.vue')
+            path: '/records',
+            name: 'Records',
+            redirect: { name: 'Home' },
+            children: [
+                {
+                    path: 'create',
+                    name: 'CreateRecord',
+                    component: () => import('~/views/records/create.vue')
+                }
+            ]
         }
     ]
 });

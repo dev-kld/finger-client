@@ -7,7 +7,7 @@
                     <div class="menu-item__name">{{ navItem.title }}</div>
                 </RouterLink>
 
-                <button class="bottom-menu__add">+</button>
+                <button class="bottom-menu__add" @click="() => router.push({ name: 'CreateRecord' })">+</button>
 
                 <RouterLink
                     v-for="(navItem, navIndex) in navigationList.slice(2, navigationList.length)"
@@ -24,9 +24,11 @@
 </template>
 
 <script lang="ts" setup>
+import { useRouter } from 'vue-router';
 import SvgIcon from '~/components/Common/SvgIcon.vue';
 import { useNavigation } from '~/composables/navigation';
 
+const router = useRouter();
 const navigation = useNavigation();
 const navigationList = [navigation.home, navigation.analytics, navigation.history, navigation.profile];
 </script>

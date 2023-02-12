@@ -38,6 +38,7 @@ interface Props {
     appendIcon?: string;
     nativeType?: InputHTMLAttributes['type'];
     modelValue?: ModelValue;
+    initialValue?: ModelValue;
     disabled?: boolean;
 }
 
@@ -46,6 +47,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emits = defineEmits<{ (e: 'update:modelValue', value: ModelValue): void }>();
+emits('update:modelValue', props.initialValue || '');
 
 const updateValue = (value: ModelValue) => {
     const modelValue = props.nativeType === 'number' ? Number(value) : value;

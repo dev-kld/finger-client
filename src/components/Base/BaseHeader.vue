@@ -27,10 +27,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useBreakpoints } from '@vueuse/core';
 import { useRouter } from 'vue-router';
 import SvgIcon from '~/components/Common/SvgIcon.vue';
-import { BREAKPOINTS } from '~/helpers/constants';
 import { useStoreUser } from '~/stores/user';
 
 interface Props {
@@ -40,8 +38,6 @@ interface Props {
 const userStore = useStoreUser();
 const props = defineProps<Props>();
 const router = useRouter();
-
-const breakpoints = useBreakpoints(BREAKPOINTS);
 </script>
 
 <style lang="scss">
